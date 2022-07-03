@@ -30,6 +30,35 @@ public class PmsBrandController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PmsBrandController.class);
 
+    @ApiOperation("获取品牌总记录数")
+    @RequestMapping(value = "/totalRecords",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getTotalRecords(){
+        return  CommonResult.success(brandService.countRecords());
+    }
+    @ApiOperation("根据条件删除品牌")
+    @RequestMapping(value = "/delBrand",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult delBrand(){
+        return CommonResult.success(brandService.delBrand());
+    }
+
+    @ApiOperation("新增品牌")
+    @RequestMapping(value = "/addBrand",method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult addBrand(@RequestBody PmsBrand pmsBrand){
+         CommonResult commonResult;
+        int brand = brandService.createBrand(pmsBrand);
+        if (brand==1){
+            commonResult=CommonResult.success(pmsBrand);
+            LOGGER.info("createBrand success:{}",pmsBrand);
+        }else {
+            commonResult=CommonResult.failed("操作失败");
+            LOGGER.info("createBrand failed:{}",pmsBrand);
+        }
+        return  commonResult;
+    }
+
     @ApiOperation("获取所有品牌列表")
     @RequestMapping(value = "listAll", method = RequestMethod.GET)
     @ResponseBody

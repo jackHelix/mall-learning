@@ -52,4 +52,30 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         }
     }
 
+    @Override
+    public CommonResult generateVerifyCode(String telephone) {
+        StringBuilder sb=new StringBuilder();
+        Random random=new Random();
+        for (int i = 0; i < 6; i++) {
+            sb.append(random.nextInt(10));
+        }
+        redisService.set(REDIS_KEY_PREFIX_AUTH_CODE+telephone,sb.toString());
+        redisService.expire(REDIS_KEY_PREFIX_AUTH_CODE+telephone,AUTH_CODE_EXPIRE_SECONDS);
+        return CommonResult.success(sb.toString());
+    }
+
+    @Override
+    public CommonResult verifyCode(String telephone, String authCode) {
+        if (StringUtils.isEmpty(authCode)){
+            return CommonResult.failed("请输入验证码");
+        }
+        String realAuthCode= redisService.get(REDIS_KEY_PREFIX_AUTH_CODE+telephone);
+        boolean result= realAuthCode.equals(authCode);
+        if (result){
+            return CommonResult.success("验证码校验成功");
+        }else {
+            return CommonResult.success("验证码不正确");
+        }
+    }
+
 }

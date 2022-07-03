@@ -21,4 +21,8 @@ public interface PmsBrandService {
     List<PmsBrand> listBrand(int pageNum, int pageSize);
 
     PmsBrand getBrand(Long id);
+
+    long countRecords();
+
+    int delBrand();
 }

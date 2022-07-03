@@ -11,9 +11,7 @@ mybatis:
   mapper-locations:
     - classpath:mapper/*.xml
     - classpath*:com/**/mapper/*.xml
-
-test4:
-  test1: 4
-
+test5:
+  test5: 5
 
 

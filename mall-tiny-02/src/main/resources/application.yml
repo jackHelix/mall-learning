@@ -12,12 +12,3 @@ mybatis:
     - classpath:mapper/*.xml
     - classpath*:com/**/mapper/*.xml
 
-
-management:
-  server:
-    port: 8081 #访问端口
-  endpoints:
-    web:
-      base-path: /actuator/i #访问根目
-      exposure:
-        include: health,info           #web允许访问的路径

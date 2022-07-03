@@ -36,4 +36,18 @@ public class UmsMemberController {
                                  @RequestParam String authCode) {
         return memberService.verifyAuthCode(telephone,authCode);
     }
+
+    @ApiOperation("获取验证码")
+    @RequestMapping(value = "/getVerifyCode",method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult getVerifyCode(@RequestParam String telephone){
+       return memberService.generateVerifyCode(telephone);
+    }
+
+    @ApiOperation("验证验证码是否正确")
+    @RequestMapping(value = "/verifyCode",method = RequestMethod.POST)
+    @ResponseBody
+    public  CommonResult verifyCode(@RequestParam String telephone,@RequestParam String authCode){
+         return  memberService.verifyCode(telephone,authCode);
+    }
 }

@@ -18,4 +18,19 @@ public interface UmsMemberService {
      */
     CommonResult verifyAuthCode(String telephone, String authCode);
 
+
+    /**
+     *生成验证码
+     * @param telephone
+     * @return
+     */
+    CommonResult generateVerifyCode(String telephone);
+
+    /**
+     * 判断手机号和验证码是否匹配
+     * @param telephone
+     * @param authCode
+     * @return
+     */
+    CommonResult verifyCode(String telephone, String authCode);
 }

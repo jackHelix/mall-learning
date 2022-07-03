@@ -12,8 +12,8 @@ mybatis:
     - classpath:mapper/*.xml
     - classpath*:com/**/mapper/*.xml
 
-test3:
-  test1: 3
+test4:
+  test1: 4
 
 
 

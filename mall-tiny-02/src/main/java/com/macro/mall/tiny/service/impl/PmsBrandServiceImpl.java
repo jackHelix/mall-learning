@@ -50,4 +50,18 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     public PmsBrand getBrand(Long id) {
         return brandMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public long countRecords() {
+        return brandMapper.countByExample(new PmsBrandExample());
+    }
+
+    @Override
+    public int delBrand() {
+        PmsBrandExample pbe=new PmsBrandExample();
+        PmsBrandExample.Criteria criteria= pbe.createCriteria();
+        //删除
+        criteria.andNameEqualTo("三星");
+        return brandMapper.deleteByExample(pbe);
+    }
 }
